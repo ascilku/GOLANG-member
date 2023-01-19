@@ -99,3 +99,5 @@ func (h *handler) CheckEmailAvailable(g *gin.Context) {
 		}
 	}
 }
+
+func (h *handler) AvatarHandler() {}
