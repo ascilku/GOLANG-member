@@ -72,10 +72,7 @@ func (h *handler) CheckEmailAvailable(g *gin.Context) {
 	var keyCheckEmailIsAvailable member.CheckEmailIsAvailable
 	err := g.ShouldBindJSON(&keyCheckEmailIsAvailable)
 	if err != nil {
-		var errors []string
-		for _, e := range err.(validator.ValidationErrors) {
-			errors = append(errors, e.Error())
-		}
+		errors := error.ErrorMessage(err)
 		errorMessage := gin.H{"errors": errors}
 		responsApi := respons.ResponsApi("Failed Check Email", http.StatusUnprocessableEntity, "FAILED", errorMessage)
 		g.JSON(http.StatusUnprocessableEntity, responsApi)
