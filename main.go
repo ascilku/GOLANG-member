@@ -17,9 +17,10 @@ func main() {
 	if err != nil {
 		fmt.Println(err.Error())
 	} else {
-		// db.Debug().AutoMigrate(&member.Member{})
+		db.Debug().AutoMigrate(&member.Member{})
 		new_repository := member.NewRepository(db)
 		new_service := member.NewService(new_repository)
+		new_service.SaveAvatarService(6, "images/1-profile.jpg")
 		new_handler := handler.NewHandler(new_service)
 
 		router := gin.Default()

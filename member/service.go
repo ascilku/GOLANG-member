@@ -10,6 +10,7 @@ type Service interface {
 	SaveService(input InputMember) (Member, error)
 	LoginService(login LoginMember) (Member, error)
 	CheckEmailIsAvailable(cheack CheckEmailIsAvailable) (bool, error)
+	SaveAvatarService(ID int, fileLocation string) (Member, error)
 }
 
 type service struct {
@@ -67,6 +68,22 @@ func (s *service) CheckEmailIsAvailable(cheack CheckEmailIsAvailable) (bool, err
 			return true, nil
 		} else {
 			return false, nil
+		}
+	}
+}
+
+func (s *service) SaveAvatarService(ID int, fileLocation string) (Member, error) {
+	findByIDRepository, err := s.repository.FindByIDRepository(ID)
+	if err != nil {
+		return findByIDRepository, err
+	} else {
+		findByIDRepository.Gambar = fileLocation
+
+		updateRepository, err := s.repository.UpdateRepository(findByIDRepository)
+		if err != nil {
+			return updateRepository, err
+		} else {
+			return updateRepository, nil
 		}
 	}
 }

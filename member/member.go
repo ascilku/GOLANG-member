@@ -7,6 +7,7 @@ type Member struct {
 	Nama      string
 	Email     string
 	Password  string
+	Gambar    string
 	CreatedAt time.Time
 	UpdatedAt time.Time
 }
